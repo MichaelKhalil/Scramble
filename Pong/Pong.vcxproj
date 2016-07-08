@@ -84,6 +84,8 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="main_game.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -91,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main_game.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="Scramble.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="stdafx.cpp" />
