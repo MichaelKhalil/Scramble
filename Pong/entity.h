@@ -30,7 +30,7 @@ public:
 
 	~Entity(){
 		delete this->texture;
-		delete this->buffer;
+//		delete this->buffer;
 		delete this->blip;
 	}
 

@@ -13,10 +13,11 @@ public:
 	virtual void Destroy(sf::RenderWindow* window);
 
 private:
-
+	sf::View view1;
 	Player* player;
 	Score* score1;
 	Score* highScore;
+	int lastHighScore;
 	sf::Font* font;
 	Map* map;
 };

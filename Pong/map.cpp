@@ -4,7 +4,7 @@
 
 Map::Map(){
 	this->Load("map.png");
-	this->velocity.x -= 1;
+	//this->velocity.x -= 1;
 }
 void Map::Update(){
 	Entity::Update();
