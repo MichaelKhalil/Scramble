@@ -1,6 +1,7 @@
 #include "main_game.h"
 #include "menu.h"
 #include <iostream>
+#include <SFML\Graphics.hpp>
 void main_game::Initialize(sf::RenderWindow* window){
 	//load font
 	this->font = new sf::Font();
@@ -14,21 +15,24 @@ void main_game::Initialize(sf::RenderWindow* window){
 	
 	this->view1.setSize(800,600);
 	this->player = new Player();
-	this->player->setPosition(window->getSize().x/2, window->getSize().y/2);
+	this->player->setPosition(window->getSize().x/2, 50);
 	this->view1.setCenter(this->player->getPosition().x, window->getSize().y/2);
-	this->map = new Map();
+	this->map = new Map(window);
+	//this->map->setPosition(500, 0);
+
+
 }
 //update objects
 void main_game::Update(sf::RenderWindow* window){
 	view1.move(.7,0);
 	this->score1->setPosition(this->view1.getCenter().x+150, 0);
-	this->highScore->setPosition(this->view1.getCenter().x-150, 0);
+	this->highScore->setPosition(this->view1.getCenter().x-150, 0); 
 	//window->setCenter(this->player);
 	window->setView(view1);
 	
 	//std::cout << this->view1.getCenter().x;
 	this->map->Update();
-	this->player->Update(window);
+	this->player->Update(window, map);
 	this->score1->Update();
 	this->highScore->Update();
 	//escape sends back to main menu, resets score
@@ -39,10 +43,13 @@ void main_game::Update(sf::RenderWindow* window){
 //draw objects
 void main_game::Render(sf::RenderWindow* window){
 	window->draw(*this->map);
-	window->draw(*this->score1);
-	window->draw(*this->highScore);
+
+	//window->draw(*this->map);
+	//window->draw(*this->score1);
+	//window->draw(*this->highScore);
 	window->draw(*this->player);
 	
+
 
 } 
 //cleanup

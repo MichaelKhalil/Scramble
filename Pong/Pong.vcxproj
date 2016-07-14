@@ -81,6 +81,7 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="end.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="main_game.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="menu.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="end.cpp" />
     <ClCompile Include="main_game.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="player.cpp" />

@@ -4,6 +4,7 @@
 #include "score.h"
 #include "player.h"
 #include "map.h"
+#include "mapI.h"
 class main_game : public tiny_state{
 public:
 
@@ -20,4 +21,6 @@ private:
 	int lastHighScore;
 	sf::Font* font;
 	Map* map;
+	MapI* mapI;
+
 };

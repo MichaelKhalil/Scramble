@@ -1,5 +1,5 @@
 #include "score.h"
-
+#include <iostream>
 
 Score::Score(sf::Font &font, unsigned int size) : sf::Text("score: 0", font, size){
 	this->value = 0;
@@ -10,5 +10,6 @@ void Score::IncrementScore(){
 }
 
 void Score::Update(){
-	this->setString(std::to_string(this->value));
+	//std::cout << std::to_string(this->value);
+	//this->setString(std::to_string(this->value));
 }
