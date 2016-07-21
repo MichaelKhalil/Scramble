@@ -5,13 +5,12 @@
 
 game_state coreState; 
 bool quitGame = false;
-
+bool dead = false;
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Scramble");
 
-	sf::View view1;//((sf::FloatRect(0, 0, window.getSize().x/2, window.getSize().y/2)));
-	//window.setView(view1);
+	sf::View view1;
 	coreState.SetWindow(&window);
 	coreState.SetState(new menu());
 

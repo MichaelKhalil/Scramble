@@ -9,8 +9,8 @@ void end::Initialize(sf::RenderWindow* window){
 	//set title at top middle of start screen
 	this->back = new sf::Text("Scramble", *this->font, 200U);
 	this->back->setOrigin(this->back->getGlobalBounds().width/2, this->back->getGlobalBounds().height/2);
-	this->back->setPosition(window->getSize().x/2, window->getSize().y/8);
-
+	//this->back->setPosition(window->getSize().x/2, window->getSize().y/8);
+	this->back->setPosition(400, 100);
 }
 void end::Update(sf::RenderWindow* window){
 	this->score1->Update();

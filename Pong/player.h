@@ -1,7 +1,7 @@
 #pragma once
 
 #include "entity.h"
-#include "end.h"
+//#include "end.h"
 #include "map.h"
 //#include <SFML/Graphics/View.hpp>
 class Player : public Entity{
