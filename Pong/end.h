@@ -9,11 +9,13 @@ public:
 	virtual void Update(sf::RenderWindow* window);
 	virtual void Render(sf::RenderWindow* window);
 	virtual void Destroy(sf::RenderWindow* window);
-
+	
+	
 private:
 	sf::Font* font;
 	sf::Text* back;
-	Score* score1;
+	sf::Text* yourScore;
+	sf::Text* bestScore;
+	Score* playerScore;
 	Score* highScore;
-	int lastHighScore;
 };

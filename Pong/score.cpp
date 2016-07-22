@@ -9,7 +9,10 @@ void Score::IncrementScore(){
 	this->value+= 1;
 }
 
+void Score::setScore(int number){
+	this->value = number;
+}
 void Score::Update(){
 	//std::cout << std::to_string(this->value);
-	//this->setString(std::to_string(this->value));
+	this->setString(std::to_string(this->value));
 }

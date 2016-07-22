@@ -6,6 +6,8 @@
 game_state coreState; 
 bool quitGame = false;
 bool dead = false;
+int score = 0;
+int lastHighScore = 0;
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Scramble");

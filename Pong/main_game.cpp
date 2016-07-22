@@ -21,13 +21,14 @@ void main_game::Initialize(sf::RenderWindow* window){
 	this->map = new Map(window);
 	sf::View  defView = window->getView();
 	//this->map->setPosition(500, 0);
-
+	
 
 }
 //update objects
 void main_game::Update(sf::RenderWindow* window){
 	view1.move(.7,0);
-
+	score1->IncrementScore();
+	this->highScore->setScore(score1->value);
 	this->score1->setPosition(this->view1.getCenter().x+150, 0);
 	this->highScore->setPosition(this->view1.getCenter().x-150, 0); 
 	//window->setCenter(this->player);
@@ -43,11 +44,17 @@ void main_game::Update(sf::RenderWindow* window){
 		//view1.setCenter(400,300);
 		//view1.reset(sf::FloatRect(0, 0, 800, 600));
 		//window->setView(view1);
+		//if(this->highScore->value < this->score1->value){
+		score = this->score1->value;
+			//highScore->IncrementScore();
+		//}
+		
 		window->setView(window->getDefaultView());
 		coreState.SetState(new end());
 		dead = false;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
+		window->setView(window->getDefaultView());
 		coreState.SetState(new menu());
 	}
 }
@@ -56,7 +63,7 @@ void main_game::Render(sf::RenderWindow* window){
 	window->draw(*this->map);
 
 	//window->draw(*this->map);
-	//window->draw(*this->score1);
+	window->draw(*this->score1);
 	//window->draw(*this->highScore);
 	window->draw(*this->player);
 	

@@ -6,7 +6,9 @@ class Score : public sf::Text{
 public:
 	Score(sf::Font &font, unsigned int size);
 	void IncrementScore();
+	void setScore(int number);
 	void Update();
-private:
 	long long value;
+private:
+	
 };

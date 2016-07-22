@@ -12,14 +12,13 @@ public:
 	virtual void Update(sf::RenderWindow* window);
 	virtual void Render(sf::RenderWindow* window);
 	virtual void Destroy(sf::RenderWindow* window);
-
+	Score* score1;
+	Score* highScore;
 private:
 	sf::View view1;
 	Player* player;
-	Score* score1;
-	Score* highScore;
 	int lastHighScore;
 	sf::Font* font;
 	Map* map;
-
+	
 };
