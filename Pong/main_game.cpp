@@ -26,7 +26,8 @@ void main_game::Initialize(sf::RenderWindow* window){
 }
 //update objects
 void main_game::Update(sf::RenderWindow* window){
-	view1.move(.7,0);
+	//view1.move(.7,0);
+	view1.move(3,0);
 	score1->IncrementScore();
 	this->highScore->setScore(score1->value);
 	this->score1->setPosition(this->view1.getCenter().x+150, 0);
@@ -57,6 +58,7 @@ void main_game::Update(sf::RenderWindow* window){
 		window->setView(window->getDefaultView());
 		coreState.SetState(new menu());
 	}
+	
 }
 //draw objects
 void main_game::Render(sf::RenderWindow* window){

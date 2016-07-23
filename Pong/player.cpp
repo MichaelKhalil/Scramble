@@ -11,6 +11,7 @@ Player::Player(){
 	this->Load("ship.png");
 	//this->map = map; 
 	this->alphaLimit = 255;
+	this->end = 0;
 	this->pixelColor = pixelColor;
 	//this->mapImage = mapImage;
 	this->texture = new sf::Texture();
@@ -51,6 +52,11 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 
 		dead = true;
 		
+	}
+		
+	if(image->getPixel(this->getPosition().x + (currentView.getCenter().x +399) - this->getPosition().x, 590).a <= end+10){
+		//coreState.SetState(new end());	
+		dead = true;
 	}
 	Entity::Update();
 }

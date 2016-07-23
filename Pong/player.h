@@ -16,4 +16,5 @@ private:
 	sf::Color* pixelColor;
 	Map* map;
 	sf::Uint8 alphaLimit;
+	sf::Uint8 end;
 };
