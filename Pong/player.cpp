@@ -4,8 +4,10 @@
 #include "menu.h"
 #include <SFML\Graphics.hpp>
 #include <SFML\Graphics\Image.hpp>
+#include <SFML\System\Clock.hpp>
 #include <iostream>
 #include <string>
+#include <Windows.h>
 //using namespace std;
 Player::Player(){
 	this->Load("ship.png");
@@ -16,13 +18,29 @@ Player::Player(){
 	//this->mapImage = mapImage;
 	this->texture = new sf::Texture();
 	this->image = new sf::Image();
+	
+	//sf::Time time1 = clock.getElapsedTime();
+	canFire = false;
 	//texture->loadFromFile("Graphics\map.png");
 	//this->mapImage->
+	bulletNum = 0;
 	this->image->loadFromFile("Graphics/map.png");
+	//Bullet *bullet = new Bullet();
 	
+	for (int i = 0; i < 20; i++)
+	{
+		bullets[i] = new Bullet();
+	}
+
 }
 void Player::Update(sf::RenderWindow* window, Map* map){
 	this->map = map;
+
+	sf::Time time = clock.getElapsedTime();
+	sf::Time resetTime;
+	
+
+
 	sf::View currentView = window->getView();
 	velocity.y = 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) - 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up);
 	velocity.x = 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) - 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) + .7f;
@@ -44,12 +62,30 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 	if(this->getPosition().x + this->getGlobalBounds().width > currentView.getCenter().x + window->getSize().x/2){
 		this->move(-3.0f, 0);
 	}
+	
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z) && canFire == true){
+		Bullet *temp = new Bullet();
+		bullets[bulletNum] = temp;
+		bullets[bulletNum]->setPosition(this->getPosition().x + this->getGlobalBounds().width/2, this->getPosition().y+this->getGlobalBounds().height/2);
+		bulletNum++;
+		canFire = false;
+		clock.restart();
+		resetTime = clock.getElapsedTime();
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		bullets[i]->move(5,0);
+		window->draw(*bullets[i]);
+	}
 
-
+	if(canFire == false && time.asSeconds() - resetTime.asSeconds() > .2){
+		canFire = true;
+	}
+	//this->bullet.move(5,0);
+	//window->draw(bullet);
 	//collision with the map
 	if(this->checkCollision(this->map) &&  image->getPixel(this->getPosition().x + this->getGlobalBounds().width/2, this->getPosition().y+this->getGlobalBounds().height/2).a == alphaLimit){
 		//std::cout << "Success";
-
 		dead = true;
 		
 	}
@@ -59,4 +95,7 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 		dead = true;
 	}
 	Entity::Update();
+	if(bulletNum >= 20){
+		bulletNum = 0;
+	}
 }

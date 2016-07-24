@@ -3,6 +3,7 @@
 #include "entity.h"
 //#include "end.h"
 #include "map.h"
+#include "bullet.h"
 //#include <SFML/Graphics/View.hpp>
 class Player : public Entity{
 
@@ -17,4 +18,8 @@ private:
 	Map* map;
 	sf::Uint8 alphaLimit;
 	sf::Uint8 end;
+	sf::Clock clock;
+	Bullet *bullets[20];
+	int bulletNum;
+	bool canFire;
 };

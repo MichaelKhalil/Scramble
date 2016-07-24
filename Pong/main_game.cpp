@@ -22,13 +22,17 @@ void main_game::Initialize(sf::RenderWindow* window){
 	sf::View  defView = window->getView();
 	//this->map->setPosition(500, 0);
 	
-
+	//Bullet *bullet = new Bullet();
+	//bullet->setPosition(300,0);
 }
 //update objects
 void main_game::Update(sf::RenderWindow* window){
-	//view1.move(.7,0);
-	view1.move(3,0);
+	view1.move(.7,0);
 	score1->IncrementScore();
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)){
+		Bullet *bullet = new Bullet();
+		bullet->setPosition(this->player->getPosition().x, this->player->getPosition().y);
+	}
 	this->highScore->setScore(score1->value);
 	this->score1->setPosition(this->view1.getCenter().x+150, 0);
 	this->highScore->setPosition(this->view1.getCenter().x-150, 0); 
@@ -40,6 +44,7 @@ void main_game::Update(sf::RenderWindow* window){
 	this->player->Update(window, map);
 	this->score1->Update();
 	this->highScore->Update();
+	//this->bullet->Update(window);
 	//escape sends back to main menu, resets score
 	if(dead){
 		//view1.setCenter(400,300);
@@ -63,7 +68,8 @@ void main_game::Update(sf::RenderWindow* window){
 //draw objects
 void main_game::Render(sf::RenderWindow* window){
 	window->draw(*this->map);
-
+	
+	//window->draw(*this->bullet);
 	//window->draw(*this->map);
 	window->draw(*this->score1);
 	//window->draw(*this->highScore);
