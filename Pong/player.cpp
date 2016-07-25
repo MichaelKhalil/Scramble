@@ -18,12 +18,17 @@ Player::Player(){
 	//this->mapImage = mapImage;
 	this->texture = new sf::Texture();
 	this->image = new sf::Image();
-	
+	//this->lives = lives;
+	//lives = 3;
 	//sf::Time time1 = clock.getElapsedTime();
 	canFire = false;
 	//texture->loadFromFile("Graphics\map.png");
 	//this->mapImage->
 	bulletNum = 0;
+	if(lives <= 0){
+		lives = 3;
+		lastX = 400; lastY = 50;
+	}
 	this->image->loadFromFile("Graphics/map.png");
 	//Bullet *bullet = new Bullet();
 	
@@ -86,16 +91,32 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 	//collision with the map
 	if(this->checkCollision(this->map) &&  image->getPixel(this->getPosition().x + this->getGlobalBounds().width/2, this->getPosition().y+this->getGlobalBounds().height/2).a == alphaLimit){
 		//std::cout << "Success";
+		lives -= 1;
+		lastX = this->getPosition().x; lastY = this->getPosition().y;
 		dead = true;
 		
 	}
 		
 	if(image->getPixel(this->getPosition().x + (currentView.getCenter().x +399) - this->getPosition().x, 590).a <= end+10){
 		//coreState.SetState(new end());	
+		//this->lives -=1;
 		dead = true;
 	}
 	Entity::Update();
 	if(bulletNum >= 20){
 		bulletNum = 0;
 	}
+}
+
+int Player::getLives(){
+	std::cout << lives;
+	return lives;
+}
+int Player::getX(){
+	std::cout << this->getPosition().x;
+	return this->getPosition().x;
+}
+int Player::getY(){
+	std::cout << this->getPosition().y;
+	return this->getPosition().y;
 }

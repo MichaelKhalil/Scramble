@@ -13,8 +13,7 @@ public:
 	virtual void Update(sf::RenderWindow* window);
 	virtual void Render(sf::RenderWindow* window);
 	virtual void Destroy(sf::RenderWindow* window);
-	Score* score1;
-	Score* highScore;
+
 private:
 	sf::View view1;
 	Player* player;
@@ -22,4 +21,8 @@ private:
 	sf::Font* font;
 	Map* map;
 	Bullet* bullet;
+	Score* score1;
+	Score* highScore;
+	sf::Text* lifeText;
+	Score* lifeNum;
 };

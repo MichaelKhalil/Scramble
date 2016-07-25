@@ -61,5 +61,8 @@ private:
 extern game_state coreState;
 extern bool quitGame;
 extern bool dead;
+extern int lastX;
+extern int lastY;
+extern int lives;
 extern int score;
 extern int lastHighScore;

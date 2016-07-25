@@ -14,9 +14,18 @@ void main_game::Initialize(sf::RenderWindow* window){
 	this->highScore = new Score(*font, 64U);
 	this->highScore->setPosition(window->getSize().x/2, 0);
 	
+	this->lifeText = new sf::Text("Lives:", *this->font, 50U);
+	this->lifeText->setPosition(window->getPosition().x-150, 10);
+	this->lifeNum = new Score(*font, 50U);
+	this->lifeNum->setPosition(window->getPosition().x-150, 10);
 	this->view1.setSize(800,600);
 	this->player = new Player();
+	if(lives == 3){
 	this->player->setPosition(window->getSize().x/2, 50);
+	}
+	if(lives < 3){
+		player->setPosition(lastX-60, lastY-60);
+	}
 	this->view1.setCenter(this->player->getPosition().x, window->getSize().y/2);
 	this->map = new Map(window);
 	sf::View  defView = window->getView();
@@ -35,7 +44,10 @@ void main_game::Update(sf::RenderWindow* window){
 	}
 	this->highScore->setScore(score1->value);
 	this->score1->setPosition(this->view1.getCenter().x+150, 0);
-	this->highScore->setPosition(this->view1.getCenter().x-150, 0); 
+	this->lifeText->setPosition(this->view1.getCenter().x-250, 10);
+	this->lifeNum->setPosition(this->view1.getCenter().x-110, 10);
+	this->lifeNum->setScore(lives);
+	//this->highScore->setPosition(this->view1.getCenter().x-150, 0); 
 	//window->setCenter(this->player);
 	window->setView(view1);
 	
@@ -43,6 +55,7 @@ void main_game::Update(sf::RenderWindow* window){
 	this->map->Update();
 	this->player->Update(window, map);
 	this->score1->Update();
+	this->lifeNum->Update();
 	this->highScore->Update();
 	//this->bullet->Update(window);
 	//escape sends back to main menu, resets score
@@ -68,7 +81,8 @@ void main_game::Update(sf::RenderWindow* window){
 //draw objects
 void main_game::Render(sf::RenderWindow* window){
 	window->draw(*this->map);
-	
+	window->draw(*this->lifeText);
+	window->draw(*this->lifeNum);
 	//window->draw(*this->bullet);
 	//window->draw(*this->map);
 	window->draw(*this->score1);

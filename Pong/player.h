@@ -10,6 +10,9 @@ class Player : public Entity{
 public:
 	Player();
 	void Update(sf::RenderWindow* window, Map* map);
+	int getLives();
+	int getX();
+	int getY();
 private:
 	sf::View view1;
 	sf::Texture* texture;
@@ -22,4 +25,5 @@ private:
 	Bullet *bullets[20];
 	int bulletNum;
 	bool canFire;
+	//int lives;
 };
