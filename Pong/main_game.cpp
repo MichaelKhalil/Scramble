@@ -20,12 +20,14 @@ void main_game::Initialize(sf::RenderWindow* window){
 	this->lifeNum->setPosition(window->getPosition().x-150, 10);
 	this->view1.setSize(800,600);
 	this->player = new Player();
+
 	if(lives == 3){
 	this->player->setPosition(window->getSize().x/2, 50);
 	}
 	if(lives < 3){
 		player->setPosition(lastX-60, lastY-60);
 	}
+	
 	this->view1.setCenter(this->player->getPosition().x, window->getSize().y/2);
 	this->map = new Map(window);
 	sf::View  defView = window->getView();
@@ -64,7 +66,11 @@ void main_game::Update(sf::RenderWindow* window){
 		//view1.reset(sf::FloatRect(0, 0, 800, 600));
 		//window->setView(view1);
 		//if(this->highScore->value < this->score1->value){
-		score = this->score1->value;
+		if(lives == 3)
+			score = this->score1->value;
+		else
+			score += this->score1->value;
+		
 			//highScore->IncrementScore();
 		//}
 		

@@ -26,6 +26,9 @@ Player::Player(){
 	//this->mapImage->
 	bulletNum = 0;
 	if(lives <= 0){
+		score = 0;
+	}
+	if(lives <= 0){
 		lives = 3;
 		lastX = 400; lastY = 50;
 	}
