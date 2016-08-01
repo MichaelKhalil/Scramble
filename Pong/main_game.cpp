@@ -16,8 +16,14 @@ void main_game::Initialize(sf::RenderWindow* window){
 	
 	this->lifeText = new sf::Text("Lives:", *this->font, 50U);
 	this->lifeText->setPosition(window->getPosition().x-150, 10);
+
 	this->lifeNum = new Score(*font, 50U);
 	this->lifeNum->setPosition(window->getPosition().x-150, 10);
+
+	this->fuelNum = new Score(*font, 50U);
+	this->fuelNum->setPosition(window->getPosition().x - 350, window->getPosition().y - 150);
+	this->fuelNum->setColor(sf::Color::Green);
+
 	this->view1.setSize(800,600);
 	this->player = new Player();
 
@@ -46,9 +52,11 @@ void main_game::Update(sf::RenderWindow* window){
 	}
 	this->highScore->setScore(score1->value);
 	this->score1->setPosition(this->view1.getCenter().x+150, 0);
-	this->lifeText->setPosition(this->view1.getCenter().x-250, 10);
-	this->lifeNum->setPosition(this->view1.getCenter().x-110, 10);
+	this->lifeText->setPosition(this->view1.getCenter().x-150, 10);
+	this->lifeNum->setPosition(this->view1.getCenter().x- 10, 10);
+	this->fuelNum->setPosition(this->view1.getCenter().x - 300, 10);
 	this->lifeNum->setScore(lives);
+	this->fuelNum->setScore(fuel);
 	//this->highScore->setPosition(this->view1.getCenter().x-150, 0); 
 	//window->setCenter(this->player);
 	window->setView(view1);
@@ -58,7 +66,16 @@ void main_game::Update(sf::RenderWindow* window){
 	this->player->Update(window, map);
 	this->score1->Update();
 	this->lifeNum->Update();
+	this->fuelNum->Update();
 	this->highScore->Update();
+
+	if(fuel < 600 && fuel > 300){
+		this->fuelNum->setColor(sf::Color::Yellow);
+	}
+
+	if(fuel < 300){
+		this->fuelNum->setColor(sf::Color::Red);
+	}
 	//this->bullet->Update(window);
 	//escape sends back to main menu, resets score
 	if(dead){
@@ -66,6 +83,7 @@ void main_game::Update(sf::RenderWindow* window){
 		//view1.reset(sf::FloatRect(0, 0, 800, 600));
 		//window->setView(view1);
 		//if(this->highScore->value < this->score1->value){
+		fuel = 1000;
 		if(lives == 3)
 			score = this->score1->value;
 		else
@@ -74,9 +92,19 @@ void main_game::Update(sf::RenderWindow* window){
 			//highScore->IncrementScore();
 		//}
 		
+		dead = false;
 		window->setView(window->getDefaultView());
 		coreState.SetState(new end());
-		dead = false;
+	}
+	if(success){
+
+		lastX = window->getSize().x/2; lastY = 50;
+		fuel = 1000;
+		lives = 3;
+		success = false;
+		window->setView(window->getDefaultView());
+		coreState.SetState(new end());
+		score += this->score1->value;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
 		window->setView(window->getDefaultView());
@@ -89,6 +117,7 @@ void main_game::Render(sf::RenderWindow* window){
 	window->draw(*this->map);
 	window->draw(*this->lifeText);
 	window->draw(*this->lifeNum);
+	window->draw(*this->fuelNum);
 	//window->draw(*this->bullet);
 	//window->draw(*this->map);
 	window->draw(*this->score1);

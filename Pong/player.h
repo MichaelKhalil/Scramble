@@ -22,8 +22,10 @@ private:
 	sf::Uint8 alphaLimit;
 	sf::Uint8 end;
 	sf::Clock clock;
+	sf::Clock fuelClock;
 	Bullet *bullets[20];
 	int bulletNum;
 	bool canFire;
+	bool canMove;
 	//int lives;
 };

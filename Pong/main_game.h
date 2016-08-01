@@ -25,4 +25,5 @@ private:
 	Score* highScore;
 	sf::Text* lifeText;
 	Score* lifeNum;
+	Score* fuelNum;
 };

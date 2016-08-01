@@ -22,6 +22,7 @@ Player::Player(){
 	//lives = 3;
 	//sf::Time time1 = clock.getElapsedTime();
 	canFire = false;
+	canMove = true;
 	//texture->loadFromFile("Graphics\map.png");
 	//this->mapImage->
 	bulletNum = 0;
@@ -39,19 +40,30 @@ Player::Player(){
 	{
 		bullets[i] = new Bullet();
 	}
-
+	sf::Time resetTime1;
+	 resetTime1 = clock.getElapsedTime(); 
+	 sf::Time fuelTime;
+	 fuelTime = fuelClock.getElapsedTime();
 }
 void Player::Update(sf::RenderWindow* window, Map* map){
 	this->map = map;
-
 	sf::Time time = clock.getElapsedTime();
+	sf::Time fuelTime;
+	//for fire rate
 	sf::Time resetTime;
-	
+	//for fuel depletion
+	sf::Time resetTime1;
 
 
 	sf::View currentView = window->getView();
+	if(canMove){
 	velocity.y = 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) - 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up);
 	velocity.x = 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) - 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) + .7f;
+	}
+	else{
+		velocity.y += .005;
+		velocity.x += .001;
+	}
 	//velocity.x -= this->velocity.x-.7f;
 	//velocity.y -= this->velocity.y-1.0f;
 	//collision with top wall
@@ -80,18 +92,34 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 		clock.restart();
 		resetTime = clock.getElapsedTime();
 	}
+	
 	for (int i = 0; i < 20; i++)
 	{
 		bullets[i]->move(5,0);
 		window->draw(*bullets[i]);
 	}
+	 sf::Event event;
+	while(window->pollEvent(event)){
+		
+		if(resetTime1.asMilliseconds() - fuelTime.asMilliseconds() > 0){
+			fuel -= 25;
+			fuelTime = fuelClock.getElapsedTime(); 
+		}
+	}
 
 	if(canFire == false && time.asSeconds() - resetTime.asSeconds() > .2){
 		canFire = true;
 	}
+
+
 	//this->bullet.move(5,0);
 	//window->draw(bullet);
 	//collision with the map
+
+	if(fuel <= 0){
+		canMove = false;
+	}
+
 	if(this->checkCollision(this->map) &&  image->getPixel(this->getPosition().x + this->getGlobalBounds().width/2, this->getPosition().y+this->getGlobalBounds().height/2).a == alphaLimit){
 		//std::cout << "Success";
 		lives -= 1;
@@ -103,14 +131,16 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 	if(image->getPixel(this->getPosition().x + (currentView.getCenter().x +399) - this->getPosition().x, 590).a <= end+10){
 		//coreState.SetState(new end());	
 		//this->lives -=1;
-		dead = true;
+		//lastX = window->getSize().x/2; lastY = 50;
+		success = true;
+		//dead = true;
 	}
 	Entity::Update();
 	if(bulletNum >= 20){
 		bulletNum = 0;
 	}
 }
-
+/*
 int Player::getLives(){
 	std::cout << lives;
 	return lives;
@@ -122,4 +152,4 @@ int Player::getX(){
 int Player::getY(){
 	std::cout << this->getPosition().y;
 	return this->getPosition().y;
-}
+}*/
