@@ -52,7 +52,7 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 	//for fire rate
 	sf::Time resetTime;
 	//for fuel depletion
-	sf::Time resetTime1;
+	//sf::Time resetTime1;
 
 
 	sf::View currentView = window->getView();
@@ -99,14 +99,17 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 		window->draw(*bullets[i]);
 	}
 	 sf::Event event;
-	while(window->pollEvent(event)){
-		
-		if(resetTime1.asMilliseconds() - fuelTime.asMilliseconds() > 0){
-			fuel -= 25;
-			fuelTime = fuelClock.getElapsedTime(); 
+	 fuelTime = fuelClock.getElapsedTime();
+//	while(window->pollEvent(event)){
+		std::cout << (int)fuelTime.asSeconds();
+		std::cout << "\n";
+		if((int)fuelTime.asSeconds() >= 1){
+			fuel -= 100;
+			fuelClock.restart();
+			//fuelTime = fuelClock.getElapsedTime(); 
 		}
-	}
-
+	//}
+	
 	if(canFire == false && time.asSeconds() - resetTime.asSeconds() > .2){
 		canFire = true;
 	}

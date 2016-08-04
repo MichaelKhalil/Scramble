@@ -1,4 +1,4 @@
-﻿Build started 7/31/2016 12:17:29 PM.
+﻿Build started 8/3/2016 9:54:51 PM.
      1>Project "C:\Users\Michael\Documents\GitHub\Scramble\Pong\Pong.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Scramble.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -13,11 +13,12 @@
      1>c:\users\michael\documents\github\scramble\pong\player.cpp(64): warning C4305: '+=' : truncation from 'double' to 'float'
      1>c:\users\michael\documents\github\scramble\pong\player.cpp(65): warning C4305: '+=' : truncation from 'double' to 'float'
      1>c:\users\michael\documents\github\scramble\pong\player.cpp(86): warning C4482: nonstandard extension used: enum 'sf::Keyboard::Key' used in qualified name
-     1>c:\users\michael\documents\github\scramble\pong\player.cpp(124): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
-     1>c:\users\michael\documents\github\scramble\pong\player.cpp(124): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
-     1>c:\users\michael\documents\github\scramble\pong\player.cpp(127): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
-     1>c:\users\michael\documents\github\scramble\pong\player.cpp(127): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
-     1>c:\users\michael\documents\github\scramble\pong\player.cpp(132): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
+     1>c:\users\michael\documents\github\scramble\pong\player.cpp(126): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
+     1>c:\users\michael\documents\github\scramble\pong\player.cpp(126): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
+     1>c:\users\michael\documents\github\scramble\pong\player.cpp(129): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
+     1>c:\users\michael\documents\github\scramble\pong\player.cpp(129): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
+     1>c:\users\michael\documents\github\scramble\pong\player.cpp(134): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
+     1>c:\users\michael\documents\github\scramble\pong\player.cpp(101): warning C4101: 'event' : unreferenced local variable
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -44,4 +45,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.80
+Time Elapsed 00:00:03.53
