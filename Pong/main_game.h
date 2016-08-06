@@ -5,7 +5,7 @@
 #include "player.h"
 #include "map.h"
 #include "bullet.h"
-
+#include "enemy.h"
 class main_game : public tiny_state{
 public:
 
@@ -17,6 +17,7 @@ public:
 private:
 	sf::View view1;
 	Player* player;
+	Enemy* enemy;
 	int lastHighScore;
 	sf::Font* font;
 	Map* map;

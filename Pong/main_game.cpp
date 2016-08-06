@@ -24,6 +24,10 @@ void main_game::Initialize(sf::RenderWindow* window){
 	this->fuelNum->setPosition(window->getPosition().x - 350, window->getPosition().y - 150);
 	this->fuelNum->setColor(sf::Color::Green);
 
+	this->enemy = new Enemy(0, 1, false);
+	//this->enemy->setOrigin(this->enemy->getGlobalBounds().width, this->enemy->getGlobalBounds().height/2);
+	this->enemy->setPosition(1020,400);
+
 	this->view1.setSize(800,600);
 	this->player = new Player();
 
@@ -64,6 +68,7 @@ void main_game::Update(sf::RenderWindow* window){
 	//std::cout << this->view1.getCenter().x;
 	this->map->Update();
 	this->player->Update(window, map);
+	this->enemy->Update(window, map);
 	this->score1->Update();
 	this->lifeNum->Update();
 	this->fuelNum->Update();
@@ -118,6 +123,7 @@ void main_game::Render(sf::RenderWindow* window){
 	window->draw(*this->lifeText);
 	window->draw(*this->lifeNum);
 	window->draw(*this->fuelNum);
+	window->draw(*this->enemy);
 	//window->draw(*this->bullet);
 	//window->draw(*this->map);
 	window->draw(*this->score1);

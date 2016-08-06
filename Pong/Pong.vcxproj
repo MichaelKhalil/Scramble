@@ -83,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="bullet.h" />
     <ClInclude Include="end.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="main_game.h" />
@@ -96,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="end.cpp" />
+    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="main_game.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="player.cpp" />

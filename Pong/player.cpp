@@ -101,8 +101,7 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 	 sf::Event event;
 	 fuelTime = fuelClock.getElapsedTime();
 //	while(window->pollEvent(event)){
-		std::cout << (int)fuelTime.asSeconds();
-		std::cout << "\n";
+		
 		if((int)fuelTime.asSeconds() >= 1){
 			fuel -= 100;
 			fuelClock.restart();
@@ -114,7 +113,7 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 		canFire = true;
 	}
 
-
+	
 	//this->bullet.move(5,0);
 	//window->draw(bullet);
 	//collision with the map
@@ -142,6 +141,8 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 	if(bulletNum >= 20){
 		bulletNum = 0;
 	}
+	std::cout << this->getPosition().x;
+	std::cout << "\n";
 }
 /*
 int Player::getLives(){
