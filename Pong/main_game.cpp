@@ -53,7 +53,9 @@ void main_game::Update(sf::RenderWindow* window){
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)){
 		Bullet *bullet = new Bullet();
 		bullet->setPosition(this->player->getPosition().x, this->player->getPosition().y);
+		bullet->Update(window);
 	}
+	
 	this->highScore->setScore(score1->value);
 	this->score1->setPosition(this->view1.getCenter().x+150, 0);
 	this->lifeText->setPosition(this->view1.getCenter().x-150, 10);
@@ -67,7 +69,7 @@ void main_game::Update(sf::RenderWindow* window){
 	
 	//std::cout << this->view1.getCenter().x;
 	this->map->Update();
-	this->player->Update(window, map);
+	this->player->Update(window, map, enemy);
 	this->enemy->Update(window, map);
 	this->score1->Update();
 	this->lifeNum->Update();

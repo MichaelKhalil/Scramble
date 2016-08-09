@@ -10,7 +10,7 @@ class Player : public Entity{
 
 public:
 	Player();
-	void Update(sf::RenderWindow* window, Map* map);
+	void Update(sf::RenderWindow* window, Map* map, Enemy* enemy);
 	int getLives();
 	int getX();
 	int getY();
@@ -20,13 +20,12 @@ private:
 	sf::Image* image;
 	sf::Color* pixelColor;
 	Map* map;
-	Enemy* enemy;
 	sf::Uint8 alphaLimit;
 	sf::Uint8 end;
 	sf::Clock clock;
 	sf::Clock fuelClock;
 	Bullet *bullets[20];
-	
+	Enemy* enemy;
 	int bulletNum;
 	bool canFire;
 	bool canMove;

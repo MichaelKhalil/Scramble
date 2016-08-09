@@ -14,10 +14,10 @@ Enemy::Enemy(int enemyType, int dir, bool enemyDead){
 	//0 -> floaters
 	//1 -> sitters
 	this->dir = dir;
-	this->bullet = bullet;
+	this->enemyDead = false;
 	this->enemyType = enemyType;
 }
-void Enemy::Update(sf::RenderWindow* windowm, Map* map){
+void Enemy::Update(sf::RenderWindow* window, Map* map){
 	this->map = map;
 		
 	if(this->enemyType == 0){
@@ -39,13 +39,18 @@ void Enemy::Update(sf::RenderWindow* windowm, Map* map){
 		
 	}
 	Entity::Update();
-	//if(this->checkCollision(this->bullet)){
+	//if(this->checkCollision(this->map)){
 	//		this->enemyDead = true;
 	//	}
 
-		/*if(enemyDead){
+		if(enemyDead){
 			this->setPosition(-100,-100);
 			this->dir = 2;
-		}*/
+		}
+
+}
+
+void Enemy::kill(){
+	this->enemyDead = true;
 }
 

@@ -45,7 +45,8 @@ Player::Player(){
 	 sf::Time fuelTime;
 	 fuelTime = fuelClock.getElapsedTime();
 }
-void Player::Update(sf::RenderWindow* window, Map* map){
+void Player::Update(sf::RenderWindow* window, Map* map, Enemy* enemy){
+	this->enemy = enemy;
 	this->map = map;
 	sf::Time time = clock.getElapsedTime();
 	sf::Time fuelTime;
@@ -84,6 +85,7 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 	}
 	
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z) && canFire == true){
+
 		Bullet *temp = new Bullet();
 		bullets[bulletNum] = temp;
 		bullets[bulletNum]->setPosition(this->getPosition().x + this->getGlobalBounds().width/2, this->getPosition().y+this->getGlobalBounds().height/2);
@@ -98,7 +100,7 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 		bullets[i]->move(5,0);
 		window->draw(*bullets[i]);
 	}
-	 sf::Event event;
+	// sf::Event event;
 	 fuelTime = fuelClock.getElapsedTime();
 //	while(window->pollEvent(event)){
 		
@@ -112,7 +114,13 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 	if(canFire == false && time.asSeconds() - resetTime.asSeconds() > .2){
 		canFire = true;
 	}
-
+	for (int i = 0; i < 20; i++)
+	{
+	
+		if(this->enemy->checkCollision(this->bullets[i])){
+			this->enemy->kill();
+		}
+	}
 	
 	//this->bullet.move(5,0);
 	//window->draw(bullet);
@@ -137,12 +145,12 @@ void Player::Update(sf::RenderWindow* window, Map* map){
 		success = true;
 		//dead = true;
 	}
+
 	Entity::Update();
 	if(bulletNum >= 20){
 		bulletNum = 0;
 	}
-	std::cout << this->getPosition().x;
-	std::cout << "\n";
+	
 }
 /*
 int Player::getLives(){
