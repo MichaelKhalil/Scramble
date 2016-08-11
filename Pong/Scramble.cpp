@@ -8,7 +8,8 @@ bool quitGame = false;
 bool dead = false;
 bool success = false;
 int score = 0;
-int lives = 3, fuel = 1000;
+int lives = 3;
+int fuel = 1000;
 int lastX = 0, lastY = 0;
 int lastHighScore = 0;
 int main()

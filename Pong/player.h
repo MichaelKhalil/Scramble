@@ -10,7 +10,7 @@ class Player : public Entity{
 
 public:
 	Player();
-	void Update(sf::RenderWindow* window, Map* map, Enemy* enemy);
+	void Update(sf::RenderWindow* window, Map* map, Enemy* floater);
 	int getLives();
 	int getX();
 	int getY();
@@ -25,7 +25,7 @@ private:
 	sf::Clock clock;
 	sf::Clock fuelClock;
 	Bullet *bullets[20];
-	Enemy* enemy;
+	Enemy* floater;
 	int bulletNum;
 	bool canFire;
 	bool canMove;

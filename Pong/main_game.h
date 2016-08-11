@@ -17,7 +17,6 @@ public:
 private:
 	sf::View view1;
 	Player* player;
-	Enemy* enemy;
 	int lastHighScore;
 	sf::Font* font;
 	Map* map;
@@ -27,4 +26,7 @@ private:
 	sf::Text* lifeText;
 	Score* lifeNum;
 	Score* fuelNum;
+
+	Enemy* floater;
+	Enemy* floater1;
 };

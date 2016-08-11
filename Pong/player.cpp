@@ -45,8 +45,8 @@ Player::Player(){
 	 sf::Time fuelTime;
 	 fuelTime = fuelClock.getElapsedTime();
 }
-void Player::Update(sf::RenderWindow* window, Map* map, Enemy* enemy){
-	this->enemy = enemy;
+void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater){
+	this->floater = floater;
 	this->map = map;
 	sf::Time time = clock.getElapsedTime();
 	sf::Time fuelTime;
@@ -71,7 +71,8 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* enemy){
 	if(this->getPosition().y < 0){
 		move(0, 3.0f);
 	}
-	//collision with bottom wall
+	//collision with bottom wall\
+
 	if(this->getPosition().y + this->getGlobalBounds().height > 600){
 		move(0, -3.0f);
 	}
@@ -104,7 +105,7 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* enemy){
 	 fuelTime = fuelClock.getElapsedTime();
 //	while(window->pollEvent(event)){
 		
-		if((int)fuelTime.asSeconds() >= 1){
+		if((int)fuelTime.asSeconds() >= 2){
 			fuel -= 100;
 			fuelClock.restart();
 			//fuelTime = fuelClock.getElapsedTime(); 
@@ -117,8 +118,8 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* enemy){
 	for (int i = 0; i < 20; i++)
 	{
 	
-		if(this->enemy->checkCollision(this->bullets[i])){
-			this->enemy->kill();
+		if(this->floater->checkCollision(this->bullets[i])){
+			this->floater->kill();
 		}
 	}
 	
@@ -135,9 +136,14 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* enemy){
 		lives -= 1;
 		lastX = this->getPosition().x; lastY = this->getPosition().y;
 		dead = true;
-		
 	}
-		
+	
+	if(this->checkCollision(this->floater)){
+		lives -= 1;
+		lastX = this->getPosition().x; lastY = this->getPosition().y;
+		dead = true;
+	}
+
 	if(image->getPixel(this->getPosition().x + (currentView.getCenter().x +399) - this->getPosition().x, 590).a <= end+10){
 		//coreState.SetState(new end());	
 		//this->lives -=1;

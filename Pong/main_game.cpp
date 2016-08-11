@@ -24,9 +24,14 @@ void main_game::Initialize(sf::RenderWindow* window){
 	this->fuelNum->setPosition(window->getPosition().x - 350, window->getPosition().y - 150);
 	this->fuelNum->setColor(sf::Color::Green);
 
-	this->enemy = new Enemy(0, 1, false);
-	//this->enemy->setOrigin(this->enemy->getGlobalBounds().width, this->enemy->getGlobalBounds().height/2);
-	this->enemy->setPosition(1020,400);
+
+
+	this->floater = new Enemy(0, 1, false);
+	this->floater->setPosition(1020,400);
+
+	this->floater1 = new Enemy(0, 1, false);
+	this->floater1->setPosition(1160,300);
+
 
 	this->view1.setSize(800,600);
 	this->player = new Player();
@@ -50,6 +55,7 @@ void main_game::Initialize(sf::RenderWindow* window){
 void main_game::Update(sf::RenderWindow* window){
 	view1.move(.7,0);
 	score1->IncrementScore();
+	score = this->score1->value;
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)){
 		Bullet *bullet = new Bullet();
 		bullet->setPosition(this->player->getPosition().x, this->player->getPosition().y);
@@ -69,13 +75,21 @@ void main_game::Update(sf::RenderWindow* window){
 	
 	//std::cout << this->view1.getCenter().x;
 	this->map->Update();
-	this->player->Update(window, map, enemy);
-	this->enemy->Update(window, map);
+	this->player->Update(window, map, floater);
+	
+
+	this->floater->Update(window, map);
+	this->floater1->Update(window, map);
+
+	this->score1->value = score;
 	this->score1->Update();
 	this->lifeNum->Update();
 	this->fuelNum->Update();
 	this->highScore->Update();
 
+	if(fuel > 600){
+		this->fuelNum->setColor(sf::Color::Green);
+	}
 	if(fuel < 600 && fuel > 300){
 		this->fuelNum->setColor(sf::Color::Yellow);
 	}
@@ -103,6 +117,7 @@ void main_game::Update(sf::RenderWindow* window){
 		window->setView(window->getDefaultView());
 		coreState.SetState(new end());
 	}
+	std::cout << score;
 	if(success){
 
 		lastX = window->getSize().x/2; lastY = 50;
@@ -118,6 +133,7 @@ void main_game::Update(sf::RenderWindow* window){
 		coreState.SetState(new menu());
 	}
 	
+
 }
 //draw objects
 void main_game::Render(sf::RenderWindow* window){
@@ -125,7 +141,8 @@ void main_game::Render(sf::RenderWindow* window){
 	window->draw(*this->lifeText);
 	window->draw(*this->lifeNum);
 	window->draw(*this->fuelNum);
-	window->draw(*this->enemy);
+	window->draw(*this->floater);
+	window->draw(*this->floater1);
 	//window->draw(*this->bullet);
 	//window->draw(*this->map);
 	window->draw(*this->score1);

@@ -16,10 +16,13 @@ Enemy::Enemy(int enemyType, int dir, bool enemyDead){
 	this->dir = dir;
 	this->enemyDead = false;
 	this->enemyType = enemyType;
+
+	this->font = new sf::Font();
+	this->font->loadFromFile("font.ttf");
+	this->score1 = new Score(*font, 64U);
 }
 void Enemy::Update(sf::RenderWindow* window, Map* map){
 	this->map = map;
-		
 	if(this->enemyType == 0){
 		if(this->dir == 0){
 			//velocity.y -= .005;
@@ -36,7 +39,6 @@ void Enemy::Update(sf::RenderWindow* window, Map* map){
 			this->dir = 0;
 		}
 		
-		
 	}
 	Entity::Update();
 	//if(this->checkCollision(this->map)){
@@ -47,10 +49,20 @@ void Enemy::Update(sf::RenderWindow* window, Map* map){
 			this->setPosition(-100,-100);
 			this->dir = 2;
 		}
-
+		
 }
 
 void Enemy::kill(){
+	//function seems to call twice, reason is unsure, fuel increments halved to accomodate
+	//floater
+
+	if(this->enemyType == 0){
+		fuel += 200;
+		score += 1000;
+	}
+//	std::cout << "\n";
+	//std::cout << score;
+
 	this->enemyDead = true;
 }
 
