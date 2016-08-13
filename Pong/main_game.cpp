@@ -33,6 +33,9 @@ void main_game::Initialize(sf::RenderWindow* window){
 	this->floater1->setPosition(1160,300);
 
 
+	this->sitter = new Enemy(1, 1, false);
+	this->sitter->setPosition(1600,240);
+
 	this->view1.setSize(800,600);
 	this->player = new Player();
 
@@ -75,11 +78,13 @@ void main_game::Update(sf::RenderWindow* window){
 	
 	//std::cout << this->view1.getCenter().x;
 	this->map->Update();
-	this->player->Update(window, map, floater);
+	this->player->Update(window, map, floater, floater1, sitter);
 	
 
 	this->floater->Update(window, map);
 	this->floater1->Update(window, map);
+
+	this->sitter->Update(window, map);
 
 	this->score1->value = score;
 	this->score1->Update();
@@ -117,7 +122,7 @@ void main_game::Update(sf::RenderWindow* window){
 		window->setView(window->getDefaultView());
 		coreState.SetState(new end());
 	}
-	std::cout << score;
+	//std::cout << score;
 	if(success){
 
 		lastX = window->getSize().x/2; lastY = 50;
@@ -143,6 +148,7 @@ void main_game::Render(sf::RenderWindow* window){
 	window->draw(*this->fuelNum);
 	window->draw(*this->floater);
 	window->draw(*this->floater1);
+	window->draw(*this->sitter);
 	//window->draw(*this->bullet);
 	//window->draw(*this->map);
 	window->draw(*this->score1);

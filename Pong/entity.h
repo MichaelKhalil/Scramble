@@ -34,7 +34,7 @@ public:
 		delete this->blip;
 	}
 
-protected:
+//protected:
 	sf::Vector2f velocity;
 private:
 	sf::Texture* texture;

@@ -18,11 +18,14 @@ Player::Player(){
 	//this->mapImage = mapImage;
 	this->texture = new sf::Texture();
 	this->image = new sf::Image();
+
+	this->bomb = new Bomb();
 	//this->lives = lives;
 	//lives = 3;
 	//sf::Time time1 = clock.getElapsedTime();
 	canFire = false;
 	canMove = true;
+	canBomb = true;
 	//texture->loadFromFile("Graphics\map.png");
 	//this->mapImage->
 	bulletNum = 0;
@@ -45,9 +48,12 @@ Player::Player(){
 	 sf::Time fuelTime;
 	 fuelTime = fuelClock.getElapsedTime();
 }
-void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater){
+void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater, Enemy* floater1, Enemy* sitter){
 	this->floater = floater;
+	this->floater1 = floater1;
+	this->sitter = sitter;
 	this->map = map;
+	this->bomb = bomb;
 	sf::Time time = clock.getElapsedTime();
 	sf::Time fuelTime;
 	//for fire rate
@@ -85,6 +91,22 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater){
 		this->move(-3.0f, 0);
 	}
 	
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X) && canBomb == true){
+		this->bomb->setPosition(this->getPosition().x + 50, this->getPosition().y + 50);
+		this->bomb->reset();
+		this->bomb->standby();
+		canBomb = false;
+	}
+	this->bomb->Update(window);
+
+	if(image->getPixel(this->bomb->getPosition().x + this->bomb->getGlobalBounds().width/2, this->bomb->getPosition().y + this->bomb->getGlobalBounds().height/2).a == alphaLimit){
+		this->bomb->standby();
+		canBomb = true;
+	}
+	//this->bomb->move(0,10);
+	
+	window->draw(*this->bomb);
+
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z) && canFire == true){
 
 		Bullet *temp = new Bullet();
@@ -93,9 +115,9 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater){
 		bulletNum++;
 		canFire = false;
 		clock.restart();
+	
 		resetTime = clock.getElapsedTime();
 	}
-	
 	for (int i = 0; i < 20; i++)
 	{
 		bullets[i]->move(5,0);
@@ -118,8 +140,14 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater){
 	for (int i = 0; i < 20; i++)
 	{
 	
-		if(this->floater->checkCollision(this->bullets[i])){
+		if(this->floater->checkCollision(this->bullets[i]) || this->floater->checkCollision(this->bomb)){
 			this->floater->kill();
+		}
+		if(this->floater1->checkCollision(this->bullets[i]) || this->floater1->checkCollision(this->bomb)){
+			this->floater1->kill();
+		}
+		if(this->sitter->checkCollision(this->bullets[i]) || this->sitter->checkCollision(this->bomb)){
+			this->sitter->kill();
 		}
 	}
 	
@@ -138,11 +166,14 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater){
 		dead = true;
 	}
 	
-	if(this->checkCollision(this->floater)){
+
+	if(this->checkCollision(this->floater) ||  this->checkCollision(this->floater1) || this->checkCollision(this->sitter)){
 		lives -= 1;
 		lastX = this->getPosition().x; lastY = this->getPosition().y;
 		dead = true;
 	}
+
+
 
 	if(image->getPixel(this->getPosition().x + (currentView.getCenter().x +399) - this->getPosition().x, 590).a <= end+10){
 		//coreState.SetState(new end());	

@@ -4,6 +4,7 @@
 #include "map.h"
 #include "game_state.h"
 #include "score.h"
+//#include "player.h"
 //#include "bullet.h"
 //#include <SFML/Graphics/View.hpp>
 class Enemy : public Entity{
