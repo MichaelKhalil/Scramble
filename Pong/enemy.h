@@ -13,6 +13,7 @@ public:
 	Enemy(int enemyType, int dir, bool enemyDead);
 	void Update(sf::RenderWindow* window, Map* map);
 	void kill();
+	void excite(int playerX, int playerY);
 private:
 	Map* map;
 	sf::Texture* texture;
@@ -24,4 +25,5 @@ private:
 	int enemyType;
 	int dir;
 	bool enemyDead;
+	bool playerNear;
 };

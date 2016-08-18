@@ -164,5 +164,13 @@ void main_game::Destroy(sf::RenderWindow* window){
 	delete this->highScore;
 	delete this->player;
 	delete this->map;
+	delete this->lifeNum;
+//	delete this->score1;
+	delete this->floater;
+	delete this->floater1;
+	delete this->sitter;
+	delete this->fuelNum;
+	delete this->lifeText;
+
 }
 

@@ -151,6 +151,8 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater, Enemy* f
 		}
 	}
 	
+	this->sitter->excite(this->getPosition().x + this->getGlobalBounds().width/2, this->getPosition().y+this->getGlobalBounds().height/2);
+
 	//this->bullet.move(5,0);
 	//window->draw(bullet);
 	//collision with the map

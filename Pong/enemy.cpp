@@ -26,6 +26,7 @@ Enemy::Enemy(int enemyType, int dir, bool enemyDead){
 	this->font = new sf::Font();
 	this->font->loadFromFile("font.ttf");
 	this->score1 = new Score(*font, 64U);
+	this->playerNear = false;
 }
 void Enemy::Update(sf::RenderWindow* window, Map* map){
 	this->map = map;
@@ -51,6 +52,9 @@ void Enemy::Update(sf::RenderWindow* window, Map* map){
 
 		//}
 	}
+/*	if(playerNear){
+		std::cout << "hello";
+	}*/
 	Entity::Update();
 	//if(this->checkCollision(this->map)){
 	//		this->enemyDead = true;
@@ -80,3 +84,25 @@ void Enemy::kill(){
 	this->enemyDead = true;
 }
 
+void Enemy::excite(int playerX, int playerY){
+	
+	if(this->getPosition().x - playerX < 300 &&  this->getPosition().x - playerX > - 300 && this->getPosition().y - playerY < 200 &&  this->getPosition().y - playerY > - 200){
+		//this->playerNear = true;
+		if(this->getPosition().x - playerX > 0){
+			this->move(-1,0);
+		}
+		else{
+			this->move(1,0);
+		}
+		if(this->getPosition().y - playerY > 0){
+			this->move(0,-1);
+		}
+		else{
+			this->move(0,1);
+		}
+
+	}
+	else{
+		//this->playerNear = false;
+	}
+}
