@@ -75,7 +75,7 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater, Enemy* f
 	//movement
 	if(canMove){
 	velocity.y = 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) - 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up);
-	velocity.x = 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) - 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) + .7f;
+	velocity.x = 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) - 3 * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) + .9f;
 	}
 	else{
 		velocity.y += .005;
@@ -141,8 +141,8 @@ void Player::Update(sf::RenderWindow* window, Map* map, Enemy* floater, Enemy* f
 		canFire = true;
 	}
 	 fuelTime = fuelClock.getElapsedTime();
-	 //fuel depletion every 2 seconds
-		if((int)fuelTime.asSeconds() >= 2){
+	 //fuel depletion every second
+		if((int)fuelTime.asSeconds() >= 1){
 			fuel -= 100;
 			fuelClock.restart();
 			

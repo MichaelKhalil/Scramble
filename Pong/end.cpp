@@ -46,7 +46,7 @@ void end::Update(sf::RenderWindow* window){
 		coreState.SetState(new menu());
 	}
 }
-void end::Render(sf::RenderWindow* window)
+void end::Render(sf::RenderWindow* window){
 	window->draw(*this->playerScore);
 	window->draw(*this->back);
 	window->draw(*this->yourScore);
@@ -54,7 +54,6 @@ void end::Render(sf::RenderWindow* window)
 	window->draw(*this->highScore);
 	//handle between changing states, either set state to game or signify quit	
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return)){
-
 			coreState.SetState(new main_game());
 	}
 }
