@@ -8,7 +8,7 @@ void end::Initialize(sf::RenderWindow* window){
 	this->font = new sf::Font();
 	this->font->loadFromFile("font.ttf");
 
-	//set title at top middle of start screen
+
 	this->back = new sf::Text("Game Over", *this->font, 100U);
 	back->setColor(sf::Color::Red);
 	this->back->setOrigin(this->back->getGlobalBounds().width/2, this->back->getGlobalBounds().height/2);
@@ -46,9 +46,7 @@ void end::Update(sf::RenderWindow* window){
 		coreState.SetState(new menu());
 	}
 }
-void end::Render(sf::RenderWindow* window){
-
-
+void end::Render(sf::RenderWindow* window)
 	window->draw(*this->playerScore);
 	window->draw(*this->back);
 	window->draw(*this->yourScore);
@@ -64,5 +62,8 @@ void end::Render(sf::RenderWindow* window){
 void end::Destroy(sf::RenderWindow* window){
 	delete this->font;
 	delete this->back;
-
+	delete this->bestScore;
+	delete this->highScore;
+	delete this->playerScore;
+	delete this->yourScore;
 }

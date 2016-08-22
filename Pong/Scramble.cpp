@@ -37,7 +37,6 @@ int main()
 		window.clear(sf::Color::Black);
 		coreState.Update();
 		coreState.Render();
-
 		window.display();
 		if(quitGame){
 			window.close();

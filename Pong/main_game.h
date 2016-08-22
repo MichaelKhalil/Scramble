@@ -29,6 +29,15 @@ private:
 
 	Enemy* floater;
 	Enemy* floater1;
+	Enemy* floater2;
+	Enemy* floater3;
 
 	Enemy* sitter;
+	Enemy* sitter1;
+	Enemy* sitter2;
+	Enemy* sitter3;
+	Enemy* sitter4;
+	Enemy* sitter5;
+	Enemy* sitter6;
+	Enemy* sitter7;
 };

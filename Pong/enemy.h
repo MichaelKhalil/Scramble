@@ -21,6 +21,8 @@ private:
 	Score* score1;
 	sf::Font* font;
 	sf::Uint8 alphaLimit;
+	sf::SoundBuffer* buffer;
+	sf::Sound * sound;
 	//Bullet* bullet;
 	int enemyType;
 	int dir;

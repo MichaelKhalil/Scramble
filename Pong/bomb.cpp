@@ -11,10 +11,9 @@ Bomb::Bomb(){
 	//velocity.y = 0.0f;
 	wait = false;
 }
+//bomb movement
 void Bomb::Update(sf::RenderWindow* window){
-	std::cout << wait;
 	if(wait == true){
-
 		velocity.x = 2.5f;
 		velocity.y += 0.1f;
 	}
@@ -30,7 +29,7 @@ void Bomb::reset(){
 	velocity.x = 0.0f;
 	velocity.y = 0.0f;
 }
-
+//wait until bomb hits something before being able to shoot again
 void Bomb::standby(){
 	wait = !wait;
 }

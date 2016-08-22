@@ -11,7 +11,9 @@ class Player : public Entity{
 
 public:
 	Player();
-	void Update(sf::RenderWindow* window, Map* map, Enemy* floater, Enemy* floater1, Enemy* sitter);
+	void Update(sf::RenderWindow* window, Map* map, Enemy* floater, Enemy* floater1, Enemy* floater2, Enemy* floater3, 
+		Enemy* sitter, Enemy* sitter1, Enemy* sitter2, Enemy* sitter3, Enemy* sitter4, Enemy* sitter5, Enemy* sitter6, Enemy* sitter7);
+	void death();
 	int getLives();
 	int getX();
 	int getY();
@@ -23,13 +25,24 @@ private:
 	Map* map;
 	sf::Uint8 alphaLimit;
 	sf::Uint8 end;
+	sf::SoundBuffer* buffer;
+	sf::Sound * sound;
 	sf::Clock clock;
 	sf::Clock fuelClock;
 	Bullet *bullets[20];
 	Bomb* bomb;
 	Enemy* floater;
 	Enemy* floater1;
+	Enemy* floater2;
+	Enemy* floater3;
 	Enemy* sitter;
+	Enemy* sitter1;
+	Enemy* sitter2;
+	Enemy* sitter3;
+	Enemy* sitter4;
+	Enemy* sitter5;
+	Enemy* sitter6;
+	Enemy* sitter7;
 	int bulletNum;
 	bool canFire;
 	bool canBomb;
